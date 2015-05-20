@@ -38,3 +38,8 @@ So far the best explaination to the whole idea of duck typing I've read.
 - Don't couple classes, do not do unnecessary checks for type of an object. Write self-explanatory code and tests instead.
 - "If the method is there, it is the right object"
 - Use full words while naming variables or methods rather, than abbrevations.
+
+## Chapter 9
+A nice introduction both to Test::Unit and RSpec. Some other testing gems such as *shoulda* or *mocha* were mentioned.
+Write the damn tests!
+I took a random program I wrote before and made some RSpec tests for it. Although the syntax in the book is outdated,  tthe overall setup and first run went smoothly.
