@@ -18,3 +18,17 @@ I knew most of the regex basics but I had no idea that /^$/ and /\A\z/ are two d
 ^, $ - cover beginning and end of a **line**
 \A, \z - cover beginning and end of a **string**  
 It's very important to keep that in mind while working with multiline strings.
+
+## Chapter 6
+I learned that there can be only one instance of the same symbol and that makes any otherwise costly comparison or presence checks lightning fast. Use strings only if you need them to store some data to be processed later, otherwise use symbols.
+
+## Chapter 7
+Private vs protected:   
+*Private* methods can be accessed from a instance of a class and all of its subclasses.
+This **WON'T WORK** if the method is private:   
+```
+def compareTo(x)   
+  self.someMethod <=> x.someMethod   
+end   
+```
+That's when *protected* comes in: it allows a method of a class to be called not just on its own instance but also on any other instances.
