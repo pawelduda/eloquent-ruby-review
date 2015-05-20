@@ -42,4 +42,29 @@ So far the best explaination to the whole idea of duck typing I've read.
 ## Chapter 9
 A nice introduction both to Test::Unit and RSpec. Some other testing gems such as *shoulda* or *mocha* were mentioned.
 Write the damn tests!
-I took a random program I wrote before and made some RSpec tests for it. Although the syntax in the book is outdated,  tthe overall setup and first run went smoothly.
+I took a random program I wrote before and made some RSpec tests for it. Although the syntax in the book is outdated, the overall setup and first run went smoothly.
+
+## Chapter 10
+To make good classes in Ruby, one must know the good balance between writing methods small enough so that they do one single thing and not overdoing this by cluttering classes with code that does not need its own method.    Decomposing classes into small methods provides more options for writing tests later on. The method names should give the maintainer idea about what the method does.
+
+## Chapter 11
+Think of most Ruby operators as of regular methods:
+```
+# Both are the same thing
+a + b
+a.+(b)
+```
+While sometimes it's a nice idea to overload operators, it may also confuse readers. A solution to that is to provide an alternative which is a method with a regular name that simply tells what it does.
+```
+Time.now + 60
+Time.now.add_seconds(60)
+```
+
+## Chapter 12
+There are 4 equality operators in Ruby:   
+== - the 'generic' equality operator, it's behaviour is mostly class-specific    
+=== - used in case constructs
+eql? - returns true if both objects refer to the same hash key, related to class hash method    
+equal? - checks if two objects are identical, should not be overriden   
+
+!!!!! In the end, I found this chapter the most confusing up to this point. Leaving a mark for myself to get back to it later in a few days.
