@@ -27,8 +27,14 @@ Private vs protected:
 *Private* methods can be accessed from a instance of a class and all of its subclasses.
 This **WON'T WORK** if the method is private:   
 ```
-def compareTo(x)   
+def compareTo(x)
   self.someMethod <=> x.someMethod   
 end   
 ```
 That's when *protected* comes in: it allows a method of a class to be called not just on its own instance but also on any other instances.
+
+## Chapter 8
+So far the best explaination to the whole idea of duck typing I've read.
+- Don't couple classes, do not do unnecessary checks for type of an object. Write self-explanatory code and tests instead.
+- "If the method is there, it is the right object"
+- Use full words while naming variables or methods rather, than abbrevations.
