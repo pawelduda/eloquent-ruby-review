@@ -1,6 +1,7 @@
 require './big_ascii_number'
 
-test_ascii = "-**----*--***--***---*---****--**--****--**---**--
+test_ascii = 
+"-**----*--***--***---*---****--**--****--**---**--
 *--*--**-----*----*-*--*-*----*-------*-*--*-*--*-
 *--*---*---**---**--****-***--***----*---**---***-
 *--*---*--*-------*----*----*-*--*--*---*--*----*-
@@ -35,8 +36,8 @@ describe BigAsciiNumber do
   end
 
   it 'should have a row of dashes below the ascii number' do
-    big_ascii_number = BigAsciiNumber.new('123')
-    big_ascii_number.to_s.lines[-1][0..-1].split.each do |char|
+    big_ascii_number = BigAsciiNumber.new('123').to_ascii
+    big_ascii_number.to_s.lines[-1][0..-2].split('').each do |char|
       expect(char).to eq '-'
     end
   end
