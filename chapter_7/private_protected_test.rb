@@ -12,7 +12,7 @@ class Foo
 
     if other
       begin
-        other.protected_test if other
+        other.protected_test
       rescue NoMethodError
         puts 'Error: Attempted to call protected method of another instance of the same class (or its subclass).'
         return
@@ -28,7 +28,7 @@ class Foo
     
     if other
       begin
-        other.private_test if other
+        other.private_test
       rescue NoMethodError
         puts 'Error: Attempted to call private method of another instance of the same class (or its subclass).'
         return
