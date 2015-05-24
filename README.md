@@ -221,3 +221,55 @@ Using Proc is dangerous because it will silently ignore missing/extra arguments 
 When using return/break/next inside Proc vs lambda:
 - Used inside Proc will cause Ruby to return not just from the block but from the method wrapping the block.
 - Used inside lambda will cause Ruby to return only from the block.
+
+## TODO: Add chapters 20, 21, 22
+
+## Chapter 23
+In Ruby we can build so-called "magic methods" because of the fact that it method_missing takes name of the method and it's arguments, like this:
+```
+def method_missing(name, *args)
+end
+```
+Instead of building dozens of methods like this:
+```
+def replace_name(new_value)
+end
+
+def replace_address(new_value)
+end
+
+def replace_age(new_value)
+end
+
+(many more methods like this)
+```
+...we can utilize method_missing to avoid code repetition and to make our API more flexible:
+```
+def replace_param(param_name, new_value)
+end
+
+def method_missing(name, *args)
+  name_parts = name.split('_')
+  replace_param(name[0], args[0])
+end
+```
+
+## Chapter 24
+In Ruby body of a class can be reopened and changed at any time to suit our needs. This is called "monkey-patching".
+```
+class Foo
+  def who_am_i?
+    puts 'I am Foo'
+  end
+end
+
+Foo.new.who_am_i? # I am Foo
+
+class Foo
+  def who_am_i?
+    puts 'I am Bar'
+  end
+end
+
+Foo.new.who_am_i? # I am Bar
+```
