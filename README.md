@@ -273,3 +273,65 @@ end
 
 Foo.new.who_am_i? # I am Bar
 ```
+
+## Chapter 25
+Classes in Ruby can contain any code that will be evaluated when the class is created. This adds a lot of flexibility:
+```
+class Foo
+  if RUBY_VERSION == '1.9.3'
+    def Bar
+    end
+  else
+    def Bar
+    end
+  end
+end
+```
+There is a lot of space for mistakes when monkey-patching or putting programming logic inside classes. Automated tests are a must!
+
+## Chapter 26
+The most important thing I've learnt from this chapter are:
+- class_eval
+- module_eval
+- instance_eval
+They execute string we pass to them as a Ruby code. In context of current class instance, class or module. Using this we can for example add new methods with dynamically generated names.
+
+## Chapter 27
+Ruby is a great language when it comes to building both internal and external DSL's. This chapter covers the first. 
+DSL is a tool which makes completing tasks for a specified domain much easier. RSpec is a great example of an internal DSL:
+```
+describe Foo
+  it 'should output 5 when 5 is passed to its contructor'
+    foo = Foo.new(5)
+    foo.to_s.should == '5'
+  end
+end
+```
+While DSL's look like a very elegant and clean way to solve problems, one's main focus should be forgotten to spending too much time on coding something that may not be required in the end. It's a common pitfall that can drive someone away from his primary goal.
+
+Pros of building an internal DSL is that despite inventing new 'syntax' we still are able to help ourselves with all of the Ruby language. Unfortunately there are some limitations to what we can do with our DSL but that's when external DSL's come in.
+
+## Chapter 28
+To create an external DSL we need to build our own parser in Ruby. We may start with using regular expressions built into Ruby but as things get complex, the regexes may become very hard to read and maintain. Treetop exists to make this job easier. It's a DSL made for creating DSL's ;)
+```
+foo.tt:
+
+grammar Foo
+  rule statement
+    add/update/delete
+  end
+  
+  rule argument
+    (!"'" . )*
+  end
+end
+
+# Run "tt foo.tt" to create a .rb class Foo which will parse input according to the rules above
+```
+Before starting with building an external DSL, ask yourself whether you really need one. Sometimes it could be "przerost formy nad treścią".
+
+## Chapter 29
+skipped
+
+## Chapter 30
+There are various Ruby implementations, it's nice to know about MRI, YARV, jRuby and Rubinius. Since the book is 4-5 years old, I took that info with grain of salt because I guess a lot of information could be outdated.
