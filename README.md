@@ -222,7 +222,94 @@ When using return/break/next inside Proc vs lambda:
 - Used inside Proc will cause Ruby to return not just from the block but from the method wrapping the block.
 - Used inside lambda will cause Ruby to return only from the block.
 
-## TODO: Add chapters 20, 21, 22
+## Chapter 20
+3 most used hook methods in Ruby:
+.inherited - can be used to manage list of child classes
+.included - used in modules, can automatically extend class with class methods:
+.at_exit - executed right before Ruby interpreter ends its task, handle with care - in case of crash this hook may not get executed.
+
+```
+module CoolInstanceMethods
+  module CoolClassMethods
+  end
+
+  def self.included(klass)
+    klass.extend(CoolClassMethods)
+  end
+end
+```
+
+## Chapter 21
+method_missing can be used to generate our own error messages, and to list similar sounding methods (Soundex module is good for this)
+const_missing is pretty much same as method_missing, except it's made for constants
+
+When using those, make sure they work properly, penalty for writing bad method_missing and const_missing is pretty high.
+
+## Chapter 22
+Apart form error handling, method_missing can be used for delegation. Imagine we have a class whose methods make repetitive calls to a private one:
+```
+class Foo
+  def do_something
+    encrypt
+    # method body omitted
+  end
+
+  def do_something_else
+    encrypt
+    # method body omitted
+  end
+
+  private
+  def encrypt
+  end
+end
+```
+
+Instead we can wrap part of class as an object isnide it and utilize method_missing to get rid of otherwise repeated code:
+```
+class Encrypted_Foo
+  def initialize(original_foo)
+    @original_foo = original_foo
+  end
+
+  def method_missing(name, *args)
+    encrypt
+    @original_foo.send(name, *args)
+  end
+
+  private
+  def encrypt
+  end
+end
+```
+
+Of course we should check first whether the delegated method exists for the original object:
+```
+DELEGATED_METHODS = [:do_something, :do_something_else]
+
+def method_missing(name, *args)
+  encrypt
+  if DELEGATED_METHODS.include?(name)
+    @original_foo.send(name, *args)
+  else
+    super
+  end
+end
+```
+super makes sure we get the default behaviour in case the method is not supposed to be delegated (NameError if it doesn't exist in any of the superclasses.
+
+Ruby standard library comes with SimpleDelegator class. As the name says, it works like a wrapper for class similar to the example above:
+```
+class Encrypted_Foo < SimpleDelegator
+  def initialize(original_foo)
+    encrypt
+    super(original_foo)
+  end
+
+  def encrypt
+  end
+end
+```
 
 ## Chapter 23
 In Ruby we can build so-called "magic methods" because of the fact that it method_missing takes name of the method and it's arguments, like this:
