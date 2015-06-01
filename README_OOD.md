@@ -35,10 +35,9 @@ Single Responsibility - a class should only have one task. A good way to check f
 Design classes not just so they work - make sure they are prepared for the future changes! You do not know what specific changes will have to be made, so just make sure you have a good starting point for anything.
 
 ### TRUE
--
-Transparent
-Reasonable
-Usable
+Transparent  
+Reasonable  
+Usable  
 Exemplary
 
 MAKE SURE THAT THE CLASS HAS ONE, SINGLE RESPONSIBILITY! LOWER THE AMOUNT OF REASONS THIS SINGLE CLASS MAY HAVE TO CHANGE!
@@ -195,28 +194,28 @@ super = additional dependency, avoid it if you can. Use hook methods instead.
 CREATE SHALLOW CLASS/MODULE HIERARCHIES!!!
 
 ## Chapter 8
-Composition: 
-Bicycle has-a Parts.
-Bicycle is composed of Parts.
-1 next to class in UML - 1 Parts object per Bicycle
-1..* - Parts has one or more Part
+Composition:  
+Bicycle has-a Parts.  
+Bicycle is composed of Parts.  
+1 next to class in UML - 1 Parts object per Bicycle  
+1..* - Parts has one or more Part  
 
 OpenStruct takes hash as a parameter and derives attributes from it.
 
-Aggregation - a special case of composition, where an object has life independent of its container. If the container is gone, the object continues to exist. Example:
-university - department : composition
-department - proffesors : aggregation
+Aggregation - a special case of composition, where an object has life independent of its container. If the container is gone, the object continues to exist. Example:  
+university - department : composition  
+department - proffesors : aggregation  
 
-Inheritance vs composition:
-- inhertitance has free message delegation,
-- inheritance requires objects to be codified in a class hierarchy
+Inheritance vs composition:  
+- inhertitance has free message delegation,  
+- inheritance requires objects to be codified in a class hierarchy  
 
 - composition requires explicit delegation,
 - objects can have a more independent structure - the relationship is not codified in the class hierarchy
 
-If inheritance cannot be defined explicitly, use composition as a solution.
+If inheritance cannot be defined explicitly, use composition as a solution.   
 
-Inheritance is only better when it provides high rewards for a low risk. "Inheritance is a specialization."
+Inheritance is only better when it provides high rewards for a low risk. "Inheritance is a specialization."   
 
 ## Chapter 9
 The only code metric that actually matters is changiness.
@@ -254,20 +253,20 @@ Mainstream Ruby testing Frameworks:
 
 TDD, BDD - both encourage writing tests first.
 
-BDD - more inside in - starts out with boundary objects and goes inward by mocking domain objects.
+BDD - more inside in - starts out with boundary objects and goes inward by mocking domain objects.  
 TDD - more inside out - starts out with domain objects and makes its way out by testing adjacent layers of code.
 
 When testing, divide application objects into 2 categories:
 - the object that you're testing right now - "object under test",
-- everything else.
-Tests should remain as ignorant as possible about the second.
+- everything else.  
+Tests should remain as ignorant as possible about the second.  
 
-Stub - test of state. Stub makes an assertion about what value will be returned by a message. It proves a value.
+Stub - test of state. Stub makes an assertion about what value will be returned by a message. It proves a value.  
 Mock - test of behaviour. It is an expectation that a message will be sent. It proves that a message gets sent.
 
 If many objects share the same role, write shareable tests that can be reincluded!
 
-Testing inherited code:
+Testing inherited code:  
 If your classes don't violate LSP, testing inherited code will be easy.
 
 
