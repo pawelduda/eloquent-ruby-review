@@ -1,8 +1,8 @@
-SOLID
 ## Chapter 1
 
 Writing a complex application is not a problem at first. The real problem is applying changes to a poorly written code.
 
+### SOLID
 -
 Single Responsibility 
 Open-Closed
@@ -34,7 +34,7 @@ Single Responsibility - a class should only have one task. A good way to check f
 
 Design classes not just so they work - make sure they are prepared for the future changes! You do not know what specific changes will have to be made, so just make sure you have a good starting point for anything.
 
-TRUE
+### TRUE
 -
 Transparent
 Reasonable
@@ -107,3 +107,27 @@ Third example is not really a violation of the Law of Demeter because there are 
 enum --> enum --> enum --> string
 ```
 
+## Chapter 5
+
+Do not depend on classes and their names - depend on their behaviour.
+
+Polymorphism - ability of many different objects to respond to the same messages. Senders of such messages do not care about a class of the receiver - they simply trust them to do their jobs, which is implementing their own specific version of a desired behaviour.
+
+Polymorphism can be achieved in two ways:
+- by duck typing,
+- by class inheritance and modules.
+
+POLYMORPHIC METHODS ARE INTERCHANGABLE FROM THE SENDER'S POINT OF VIEW!!!
+
+Following code can be replaced by duck-typed:
+- case...when <class>
+- kind_of?, is_a?
+- responds_to?
+
+Don't be fooled by respond_to?(specific_method): it doesn't seem to directly depend on a class but it is same as 2 first cases in a disguise - it still depends on a specific method that a class would implement!
+
+trusting objects > conttolling objects
+
+Duck typing might make the code less obvious because it doesn't rely on any concrete class. In this case documentation and tests are very useful.
+
+The only case where depending on a concrete classes is acceptable is, when an objects talks to a Ruby base class or any other dependencies that can be considered very stable and aren't subject to change in a meaningful period of time. Also, Ruby classes aren't easy to override - it can be achieved by monkey patching but it can be very dangerous when done wrong.
