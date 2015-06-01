@@ -157,3 +157,40 @@ end
 ```
 
 The above refactoring removes the programmer's need to remember about superclass-specific behaviour when implementing its new subclass.
+
+## Chapter 7
+There is a tendency for modules to end with -able, e.g. "comparable", "enumerable". It suggest that a part of class can be put inside a reusable module when it plays some role. This is a good strating point for creating a new duck type, in this case, a module.
+
+Module can have own constants and methods that can be overridden by classes extended by such modules. Modules are similar to class inheritance.
+
+Method lookup without modules: 
+```
+# RoadBike --> Bicycle --> Object
+```
+
+Method lookup with modules:
+```
+class Bicycle
+  include Schedulable
+end
+
+# RoadBike --> Bicycle --> Schedulable --> Object
+```
+
+```
+# Object --> Singleton class --> Superclass --> Superclass' modules --> (repeat) --> Object
+```
+
+If a class depends on its variable that decides, what message should an object send to itself, according to its type, this can be refactored using classical inheritance.
+
+If object answeing to a message sent by receiver needs to lookup who the receiver is (check its class), that's a red light that there is a duck type because some objects have a similar interface. If they also happen to share behaviour, extract and put it inside a module.
+
+Superclass and module should only have code that applies to ALL of their subclasses!!!
+
+### LSP - Liskov Substitution Principle
+Type system must be SUBSTUITABLE to its supersystems.
+
+super = additional dependency, avoid it if you can. Use hook methods instead.
+
+CREATE SHALLOW CLASS/MODULE HIERARCHIES!!!
+
