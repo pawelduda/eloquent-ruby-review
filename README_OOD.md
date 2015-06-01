@@ -217,3 +217,57 @@ Inheritance vs composition:
 If inheritance cannot be defined explicitly, use composition as a solution.
 
 Inheritance is only better when it provides high rewards for a low risk. "Inheritance is a specialization."
+
+## Chapter 9
+The only code metric that actually matters is changiness.
+
+Refactoring is improving the internal structure of the code without altering its external behaviour.
+
+Writing tests --> reducing costs
+
+"Write tests as if you expect your future self to have amnesia." Tests == documentation
+
+Tests may help expose design flaws. When a test is hard to setup, it means that the code requiest too much context.
+Write loosely coupled tests about the only things that matter.
+
+Tests should be for messages that are defined in public interfaces.
+
+Private interfaces are unstable and often a subject to change - there is no point in writing tests that will have to be rewritten often.
+
+Only test incoming messages to a class.
+
+Outgoing messages that only matter to the sender are queries. They have no side effects on the rest. They do not have to be tested by the sender.
+
+Commands are outgoing messages that have side effects (database change, file creation, etc.). Those must be tested by the sender.
+
+Summary:
+- test incoming messages for the state they return,
+- test outgoing commands to ensure they get sent,
+- do not test queries,
+- write tests only for public interfaces.
+
+Write loosely-coupled, reusable tests.
+
+Mainstream Ruby testing Frameworks:
+- MiniTest,
+- RSpec.
+
+TDD, BDD - both encourage writing tests first.
+
+BDD - more inside in - starts out with boundary objects and goes inward by mocking domain objects.
+TDD - more inside out - starts out with domain objects and makes its way out by testing adjacent layers of code.
+
+When testing, divide application objects into 2 categories:
+- the object that you're testing right now - "object under test",
+- everything else.
+Tests should remain as ignorant as possible about the second.
+
+Stub - test of state. Stub makes an assertion about what value will be returned by a message. It proves a value.
+Mock - test of behaviour. It is an expectation that a message will be sent. It proves that a message gets sent.
+
+If many objects share the same role, write shareable tests that can be reincluded!
+
+Testing inherited code:
+If your classes don't violate LSP, testing inherited code will be easy.
+
+
