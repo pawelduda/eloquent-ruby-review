@@ -194,3 +194,26 @@ super = additional dependency, avoid it if you can. Use hook methods instead.
 
 CREATE SHALLOW CLASS/MODULE HIERARCHIES!!!
 
+## Chapter 8
+Composition: 
+Bicycle has-a Parts.
+Bicycle is composed of Parts.
+1 next to class in UML - 1 Parts object per Bicycle
+1..* - Parts has one or more Part
+
+OpenStruct takes hash as a parameter and derives attributes from it.
+
+Aggregation - a special case of composition, where an object has life independent of its container. If the container is gone, the object continues to exist. Example:
+university - department : composition
+department - proffesors : aggregation
+
+Inheritance vs composition:
+- inhertitance has free message delegation,
+- inheritance requires objects to be codified in a class hierarchy
+
+- composition requires explicit delegation,
+- objects can have a more independent structure - the relationship is not codified in the class hierarchy
+
+If inheritance cannot be defined explicitly, use composition as a solution.
+
+Inheritance is only better when it provides high rewards for a low risk. "Inheritance is a specialization."
