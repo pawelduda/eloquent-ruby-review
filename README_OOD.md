@@ -1,5 +1,5 @@
 SOLID
-## CHAPTER 1
+## Chapter 1
 
 Writing a complex application is not a problem at first. The real problem is applying changes to a poorly written code.
 
@@ -28,7 +28,7 @@ Object have state & behaviour
 
 When designing object oriented software, do not worry about who is a sender and what objects communicate with eachother, try to focus on the MESSAGES themselves.
 
-## CHAPTER 2
+## Chapter 2
 
 Single Responsibility - a class should only have one task. A good way to check for the Single Responsibility rule it to speak the class role out loud. If what you say doesn't quite agree with the structure of that class, it means that it could be refactored.
 
@@ -75,9 +75,35 @@ class Coordinate
 end
 ```
 
-# Dependency direction
+### Dependency direction
 Make objects depend on things that change less often than them.
 
 Some classes can potentially change more often - you can tell from their requirements and expectations about what role they need to fulfill.
 
 Concrete classes change more often than abstract ones.
+
+## Chapter 4
+Keep the public interface of a class simple, while hiding whatever you can from other classes.
+
+Objects should trust other objects to do their job, when asking for something instead of telling them, how to behave (just like in a good boss-employee relation).
+
+### Law of Demeter
+
+Objects should be loosely coupled.
+
+Only talk to your immediate neighbors or "only use one dot".
+
+```
+# Somewhere inside a method:
+customer.bicycle.wheel.tire # BAD!
+customer.ride # BETTER!
+
+hash.keys.sort.join(',') # OK
+```
+
+Third example is not really a violation of the Law of Demeter because there are only 2 types involved in this "train wreck":
+
+```
+enum --> enum --> enum --> string
+```
+
