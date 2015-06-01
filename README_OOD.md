@@ -2,7 +2,7 @@
 
 Writing a complex application is not a problem at first. The real problem is applying changes to a poorly written code.
 
-### SOLID
+SOLID
 -
 Single Responsibility 
 Open-Closed
@@ -131,3 +131,29 @@ trusting objects > conttolling objects
 Duck typing might make the code less obvious because it doesn't rely on any concrete class. In this case documentation and tests are very useful.
 
 The only case where depending on a concrete classes is acceptable is, when an objects talks to a Ruby base class or any other dependencies that can be considered very stable and aren't subject to change in a meaningful period of time. Also, Ruby classes aren't easy to override - it can be achieved by monkey patching but it can be very dangerous when done wrong.
+
+## Chapter 6
+
+Do not force subclasses to know, how to interact with their superclasses - it places a burden on a programmer, who creates new subclasses to remember about calling super inside initialize method, to know about what messages the superclass sends, etc.
+
+To avoid that trouble, use a post_initialize method in the superclass, as a hook. Have subclasses override that method, which makes the super call disappear.
+
+```
+class Bicycle
+  def spares
+    {
+      tire_size: tire_size,
+      chain: chain
+    }.merge(super) # BAD! Use line below instead!
+    }.merge(local_spares) # GOOD!
+  end
+end
+
+class RoadBike < Bicycle
+  def local_spares
+    { tape_color: tape_color }
+  end
+end
+```
+
+The above refactoring removes the programmer's need to remember about superclass-specific behaviour when implementing its new subclass.
