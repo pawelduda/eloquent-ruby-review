@@ -51,4 +51,33 @@ Do not worry about extra method calls - premature optimization is even worse.
 
 Avoid situations where data structures don't make their purpose obvious. Use Ruby Struct to better describe tiny data structures that do not have any behaviour (and therefore don't really need a separate class).
 
+HIDE DATA FROM YOURSELF
 
+Don't depend on complicated data structures.
+Same applies to methods - divide them into ones that have a single responsibility.
+
+## Chapter 3
+
+CBO - coupling between objects - should be as low as possible.
+High CBO = harder to test
+
+Avoid hard-coding other classes and dependencies in your classes. Create interfaces for other objects to be injected.
+
+Wrap dependencies inside methods.
+
+When class' initialize method takes many parameters - use options hash as its parameter. Do not do this to small classes, e.g.:
+
+```
+class Coordinate
+  def initialize(x, y)
+    # ommited
+  end
+end
+```
+
+# Dependency direction
+Make objects depend on things that change less often than them.
+
+Some classes can potentially change more often - you can tell from their requirements and expectations about what role they need to fulfill.
+
+Concrete classes change more often than abstract ones.
